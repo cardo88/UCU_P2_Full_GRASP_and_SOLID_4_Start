@@ -20,10 +20,14 @@ namespace Full_GRASP_And_SOLID
         {
             PopulateCatalogs();
 
+            // Se encontró que en el "recipe.AddStep(xxx)" estaba creando un "step", y
+            // ese "step" no debía crearse allí, en todo caso el que se encarga de ello
+            // es la misma "recipe" que va a tener ese "step". 
+
             Recipe recipe = new Recipe();
             recipe.FinalProduct = GetProduct("Café con leche");
-            recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
-            recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
+            recipe.AddStep(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120);
+            recipe.AddStep(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60);
 
             IPrinter printer;
             printer = new ConsolePrinter();
